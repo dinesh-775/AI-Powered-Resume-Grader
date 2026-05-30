@@ -10,14 +10,32 @@ import analysisRoutes from "./routes/analysis.routes.js";
 
 const app = express();
 
+// Allowed origins come from CLIENT_ORIGIN (comma-separated). In production set it
+// to your Vercel URL, e.g. https://ai-resume-grader.vercel.app
+const allowedOrigins = (process.env.CLIENT_ORIGIN || "http://localhost:5173")
+  .split(",")
+  .map((s) => s.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.CLIENT_ORIGIN?.split(",").map((s) => s.trim()) || "*",
+    origin(origin, callback) {
+      // Allow non-browser requests (no origin) and any whitelisted origin.
+      if (!origin || allowedOrigins.includes(origin) || allowedOrigins.includes("*")) {
+        return callback(null, true);
+      }
+      return callback(new Error(`Origin not allowed by CORS: ${origin}`));
+    },
   })
 );
 app.use(express.json({ limit: "2mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan("dev"));
+
+// Simple root route so platform health checks / browsers see something friendly.
+app.get("/", (_req, res) => {
+  res.json({ service: "AI Resume Grader API", status: "ok" });
+});
 
 app.get("/api/health", (_req, res) => {
   res.json({

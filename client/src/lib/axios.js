@@ -1,7 +1,12 @@
 import axios from "axios";
 
+// In production set VITE_API_URL to your Render backend, e.g.
+// https://ai-resume-grader-api.onrender.com/api
+// In development it falls back to "/api" which Vite proxies to localhost:5000.
+const baseURL = import.meta.env.VITE_API_URL || "/api";
+
 const api = axios.create({
-  baseURL: "/api",
+  baseURL,
   timeout: 60000, // analysis (OCR + Gemini) can take a while
 });
 
