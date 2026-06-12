@@ -98,7 +98,7 @@ export default function ResumeAnalyzer() {
         )}
 
         <div className="mb-4">
-          <label className="block text-sm font-semibold mb-1.5 text-slate-200">Job title (optional)</label>
+          <label className="block text-sm font-semibold mb-1.5 text-slate-200">Job title</label>
           <input
             type="text"
             value={jobTitle}
