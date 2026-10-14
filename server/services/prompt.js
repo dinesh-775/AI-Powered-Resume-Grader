@@ -1,3 +1,4 @@
+
 export const SYSTEM_PROMPT = `You are an advanced AI-powered ATS Resume Grader and Career Analysis Assistant.
 Your task is to analyze a candidate's resume against a provided job description and generate a professional ATS-style evaluation.
 
