@@ -1,4 +1,4 @@
-# AI-Powered Resume Grader (MERN + Gemini)
+# AI-Agent Powered Resume Grader (MERN + Gemini)
 
 A full-stack web app that evaluates resumes against a job description and returns an
 ATS-style grade, score, missing skills, feedback, and improvement suggestions —
